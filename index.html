@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WP5 - AsiaConnect Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F8F3F0;
+            color: #1D1D1B;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #EF5350 0%, #FF7043 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(239, 83, 80, 0.3);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #EF5350;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #EF5350;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calls-section {
+            margin: 3rem 0;
+        }
+
+        .call-group {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .call-header {
+            background: linear-gradient(135deg, #EF5350 0%, #9C3A26 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .call-number {
+            background: rgba(255,255,255,0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .projects-grid {
+            padding: 2rem;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: #F8F3F0;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #EF5350, #FF7043);
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(239, 83, 80, 0.2);
+            border-color: #EF5350;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1D1D1B;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        .project-description {
+            color: #555;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            background: #EF5350;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-left: 1rem;
+        }
+
+        .project-link:hover {
+            background: #9C3A26;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 83, 80, 0.4);
+        }
+
+        .search-filter {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .search-box {
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 400px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: #EF5350;
+        }
+
+        .footer {
+            background: #1D1D1B;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .call-header {
+                padding: 1rem;
+                font-size: 1.2rem;
+            }
+            
+            .projects-grid {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>WP5 Projects</h1>
+        <p>AsiaConnect Capacity Building & Training Programs</p>
+    </div>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Call Rounds</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">25</div>
+                <div class="stat-label">Total Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Focus Areas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2018-2025</div>
+                <div class="stat-label">Timeline</div>
+            </div>
+        </div>
+
+        <div class="search-filter">
+            <input type="text" class="search-box" placeholder="Search projects..." id="searchBox">
+        </div>
+
+        <div class="calls-section" id="projectsContainer">
+            <div class="call-group">
+                <div class="call-header">
+                    <div class="call-number">1</div>
+                    1st Call Projects
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">Training Programs to Establish a Tech-Culture Fusion Platform</div>
+                        <div class="project-description">Developing comprehensive training programs to create synergy between technology and cultural practices across Asian regions.</div>
+                        <a href="https://c1wp5prj09.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Training Program to Disseminate Telemedicine</div>
+                        <div class="project-description">Capacity building initiative focused on expanding telemedicine capabilities and knowledge transfer.</div>
+                        <a href="https://c1wp5prj10.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Extending Asian Soundscape Monitoring Network</div>
+                        <div class="project-description">Building an open science platform for environmental sound monitoring and analysis across Asian countries.</div>
+                        <a href="https://c1wp5prj11.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="call-group">
+                <div class="call-header">
+                    <div class="call-number">2</div>
+                    2nd Call Projects
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">Continuous Training for Telemedicine Expansion</div>
+                        <div class="project-description">Ongoing professional development for hospital engineers and medical professionals in telemedicine implementation.</div>
+                        <a href="https://c2wp5prj24.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Deeper Understanding of Natural Disaster (UND)</div>
+                        <div class="project-description">Advanced research and training programs for comprehensive disaster mitigation strategies.</div>
+                        <a href="https://c2wp5prj25.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Facilitating Distance Learning using Digital Conferencing</div>
+                        <div class="project-description">Infrastructure and training for enhanced digital education delivery across remote areas.</div>
+                        <a href="https://c2wp5prj26.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Enhancement of Nuclear Medicine Performance</div>
+                        <div class="project-description">Specialized training and capacity building for nuclear medicine practices using AsiaConnect network.</div>
+                        <a href="https://c2wp5prj27.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">LandSage: Decision Support for Natural Disasters</div>
+                        <div class="project-description">Cyber-enabled collaborative platform for disaster monitoring, analysis, and mitigation in Southeast Asia.</div>
+                        <a href="https://c2wp5prj28.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="call-group">
+                <div class="call-header">
+                    <div class="call-number">3</div>
+                    3rd Call Projects
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">Intelligent Medical Services over TEIN</div>
+                        <div class="project-description">Advanced medical service delivery through intelligent systems and TEIN network infrastructure.</div>
+                        <a href="https://c3wp5prj43.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">LandSage2: Extended Decision Support</div>
+                        <div class="project-description">Enhanced disaster monitoring system covering landslides, mudflows, and floods with improved collaboration tools.</div>
+                        <a href="https://c3wp5prj44.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Sustainable Aquatic Resource Management (MEITA)</div>
+                        <div class="project-description">IoT-based monitoring and management system for mangrove ecosystem conservation and resource sustainability.</div>
+                        <a href="https://c3wp5prj45.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Automatic Plant Disease Detection & Management</div>
+                        <div class="project-description">AI-powered agricultural system for early disease detection, classification, and treatment recommendations.</div>
+                        <a href="https://c3wp5prj46.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Cyber Performance, Collaborative Production (CP2)</div>
+                        <div class="project-description">Digital platform for collaborative artistic production, streaming, and archival services.</div>
+                        <a href="https://c3wp5prj47.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Asia-Pacific Oral Cancer Network</div>
+                        <div class="project-description">Regional collaborative network for oral cancer research, treatment, and knowledge sharing.</div>
+                        <a href="https://c3wp5prj48.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="call-group">
+                <div class="call-header">
+                    <div class="call-number">4</div>
+                    4th Call Projects
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">LandSAGE3</div>
+                        <div class="project-description">Third generation disaster monitoring and mitigation platform with enhanced capabilities.</div>
+                        <a href="https://c4wp5prj61.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Expansion of Nuclear Medicine Quality Care</div>
+                        <div class="project-description">Extended program for improving nuclear medicine standards and practices across Asian countries.</div>
+                        <a href="https://c4wp5prj62.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Climate-Resilient Agriculture for Disaster Risk Reduction</div>
+                        <div class="project-description">Agricultural adaptation strategies and training programs for climate change resilience.</div>
+                        <a href="https://c4wp5prj63.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Real-time Spatiotemporal Emission Mapping</div>
+                        <div class="project-description">Advanced environmental monitoring system for real-time emission tracking and analysis.</div>
+                        <a href="https://c4wp5prj64.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">AgPractices & Domains Platform</div>
+                        <div class="project-description">Comprehensive agricultural knowledge sharing and best practices platform.</div>
+                        <a href="https://c4wp5prj65.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="call-group">
+                <div class="call-header">
+                    <div class="call-number">5</div>
+                    5th Call Projects
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">Real-time Spatiotemporal Emission Mapping Phase-II</div>
+                        <div class="project-description">Enhanced version of the environmental monitoring system with expanded capabilities.</div>
+                        <a href="https://c5wp5prj78.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Consolidation of Nuclear Medicine Quality Care</div>
+                        <div class="project-description">Comprehensive consolidation and standardization of nuclear medicine practices across the region.</div>
+                        <a href="https://c5wp5prj79.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Empowering Girls to Reduce IT Gender Gap</div>
+                        <div class="project-description">Training and e-content development program to promote female participation in IT and ITES sectors.</div>
+                        <a href="https://c5wp5prj80.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Space Infrastructure Know-How and Applications (SIKAP+)</div>
+                        <div class="project-description">Comprehensive space technology training and application development program.</div>
+                        <a href="https://c5wp5prj81.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">AI-Enabled Water Quality Monitoring</div>
+                        <div class="project-description">Advanced AI system for quasi real-time water quality monitoring and contamination detection.</div>
+                        <a href="https://c5wp5prj82.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Building e-Learning Infrastructure (BeLISAC)</div>
+                        <div class="project-description">Comprehensive e-learning infrastructure development for South Asian countries under TEIN.</div>
+                        <a href="https://c5wp5prj83.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Cross-Disciplinary Training for Computational Biologists</div>
+                        <div class="project-description">Advanced training program for developing computational biology expertise across Asia.</div>
+                        <a href="https://c5wp5prj84.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">LandSAGE4 – Smart Collaborative Decision Support</div>
+                        <div class="project-description">Fourth generation intelligent disaster monitoring and mitigation platform with enhanced collaborative features.</div>
+                        <a href="https://c5wp5prj85.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 AsiaConnect WP5 Projects. Building capacity through technology and collaboration.</p>
+    </div>
+
+    <script>
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const projectCards = document.querySelectorAll('.project-card');
+            const callGroups = document.querySelectorAll('.call-group');
+            
+            callGroups.forEach(group => {
+                let hasVisibleProjects = false;
+                const projects = group.querySelectorAll('.project-card');
+                
+                projects.forEach(card => {
+                    const title = card.querySelector('.project-title').textContent.toLowerCase();
+                    const description = card.querySelector('.project-description').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        hasVisibleProjects = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                group.style.display = hasVisibleProjects ? 'block' : 'none';
+            });
+        });
+
+        // Smooth scroll animation for project cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
