@@ -6,7 +6,8 @@
     <title>WP5 - AsiaConnect Projects - Asi@Connect</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23003399;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%230066cc;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23grad1)'/%3E%3Cpath d='M30 45 L45 30 L60 45 M45 30 L45 70' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Ccircle cx='70' cy='30' r='8' fill='%23EF5350'/%3E%3C/svg%3E">
+    <link rel="alternate icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAADZklEQVR4nO2Wa0hUQRTHfxpZWVYfIqwPkT0oKyN6UFHUC6IHRb2gj0VBUFBQEAQVQUFRYa8Pg6AgiKCg6EFBQVlBQS+yNNPUzLbM3cxdzd31sXvnnDs7u7u7u+u9u/bBP1zm3jNnfnPmzJkZUFBQUFBQ+G8BhABhINQbEJKATuAp0OxpgLlALTAKGIrpAMqAUE8AzAQagJ+yU8kI8AJ4CNwH6oBemR8CmoBLwJx/BRABSoA/Mulfx4BqYKeJrglAIXAH+CXfMWp7dwBR/xogG/hg49yPgTVAoM0aC4Hrsv6nZPsAyHIKkAh0SDNNwGpgoouLZgPVtu+YlnKHTgFqLGbPBBIcAgQC54HfwHYnBf+nRAITgRzgtlw3W4D1Mncpgxiua0IAbJKbOTg3Aj+AQiDcDYhw4IxczBBAAHBD5u74iXkZkC3RTL1gJ7DSJkCF7O8tLpSfQXtl7qN4x1UZm+UmuSST95yo2JCTdgF2y7r3TlRsxEPHAJJ5DQObnBi3ATG/Q0dCZmfGyVrZr6MIbgIIAT5bou8wQD8wD0gBHgGDcp6c3EEI5gJ9cs5TtgDTpHE8xV/MlwCRgUZ5lv30AAvGAMwCOiVkj9rYs0JesRNyvVPm37YBmCZNoh8ocZP6LgMFctFMJ5qRkzwCooGPcv56G/s2y1ybG7aFeI8cFgmclfmnJjffEoBpX47OGheSUCy7azBJQJb8Vmd6yOvSWmJdZEKJmO+XEhxvS8WlUnB7XQBYJS81w52XnCLrsCSJDO2RHQK8dYPnb2TtcouDFcq9fjsEWC2PxKCBFDfZ3SQvpFU2trtZUrDN87lUvk/cALgs69qdVswVSaX9bq6VLG1BECnGHcf3HAJI+h2S1JfkZwcypEWPAslOMu8jSauDbgII0VD6HMq4gy76xqJxoeBK2oN+bPxC4pN0FwA5Mr/Tj43PKlMXE2ChJRIPjgNw+lJ6IaVU0muQWwAzJLmNABt9VDolI0quNYBkN6R1rncJUCzzmT4CDEqp/VFq/ng4AEwGXksYv/cw9YbkL/BZUvH4pSgaOAuMSJ68N46i81nW6Q2UmhRheS8+ysYvpYdSwPu8/UrOAs6JnZtmnPx3VVonTbbBCgoKCgoK/hl/Ae32sVFtIdaiAAAAAElFTkSuQmCC">
     
     <style>
         * {
@@ -723,4 +724,47 @@
 
             window.addEventListener('resize', function() {
                 if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
-                    menuToggle.
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        // Search Functionality
+        const searchBox = document.getElementById('searchBox');
+        const projectsContainer = document.getElementById('projectsContainer');
+
+        if (searchBox) {
+            searchBox.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const callGroups = projectsContainer.querySelectorAll('.call-group');
+
+                callGroups.forEach(group => {
+                    const projectCards = group.querySelectorAll('.project-card');
+                    let visibleCount = 0;
+
+                    projectCards.forEach(card => {
+                        const title = card.querySelector('.project-title').textContent.toLowerCase();
+                        const description = card.querySelector('.project-description').textContent.toLowerCase();
+
+                        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                            card.style.display = 'block';
+                            visibleCount++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+
+                    // Hide the entire call group if no projects match
+                    if (visibleCount === 0) {
+                        group.style.display = 'none';
+                    } else {
+                        group.style.display = 'block';
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
